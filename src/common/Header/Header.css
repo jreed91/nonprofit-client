@@ -1,0 +1,49 @@
+.nav-header {
+    width: 100%;
+    height: 80px;
+    background-color: #FDFFFC;
+    border-bottom: 1px solid #e6e8e5;
+}
+
+
+.navbar {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap; 
+    align-items: center;
+    justify-content: space-between;
+    width: 1127px;
+    margin-left: auto!important;
+    margin-right: auto!important;
+}
+
+.navbar-brand {
+    justify-content: flex-start;
+    display: inline-block;
+    line-height: inherit;
+    white-space: nowrap;
+}
+
+.navbar-nav {
+  /* This aligns items to the end line on main-axis */
+  display: flex;
+  flex-direction: row;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  justify-content: flex-end;
+}
+
+.nav-item {
+    padding: 1rem;
+}
+
+.nav-link {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+a.navbar-brand {
+    font-size: 1.5rem;
+    color: #011627
+}
