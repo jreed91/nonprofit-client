@@ -56,7 +56,7 @@ class RelatedProjects extends React.Component {
 
         return (
             <div>
-            <Header as='h2'>Related Projects</Header>
+            <Header as='h2'>Related Project</Header>
             <Item.Group>
                 {projects.map((project) => (
                             <Item key={project._id}>
