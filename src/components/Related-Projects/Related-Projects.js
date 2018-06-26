@@ -64,7 +64,7 @@ class RelatedProjects extends React.Component {
                                     <Item.Header as='a'>{project.name}</Item.Header>
                                         <Link to={`/projects/${project._id}`} >
                                         <Button primary floated='right'>
-                                            See Detail
+                                            See Details
                                         <Icon name='right chevron' />
                                         </Button>
                                         </Link>
