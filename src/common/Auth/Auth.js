@@ -1,6 +1,7 @@
 import auth0 from 'auth0-js';
 import history from './history';
 import { AUTH_CONFIG } from './auth0-variables';
+import { API_URL } from '../../config'
 
 export default class Auth {
     auth0 = new auth0.WebAuth({
@@ -9,7 +10,7 @@ export default class Auth {
       redirectUri: AUTH_CONFIG.callbackUrl,
       audience: `https://${AUTH_CONFIG.domain}/userinfo`,
       responseType: 'token id_token',
-      scope: 'openid'
+      scope: 'openid profile email'
     });
 
     constructor() {
@@ -36,12 +37,37 @@ export default class Auth {
         this.auth0.parseHash((err, authResult) => {
           if (authResult && authResult.accessToken && authResult.idToken) {
             this.setSession(authResult);
+           this.saveUserInfo(authResult);
             history.replace('/');
           } else if (err) {
             console.log(err);
             alert(`Error: ${err.error}. Check the console for further details.`);
           }
         });
+      }
+
+
+      // Save user information to DB
+      saveUserInfo(authResult) {
+        this.auth0.client.userInfo(authResult.accessToken, (err, res) => {
+          localStorage.setItem('sub', res.sub);
+          fetch(`${API_URL}/users/registration`, {
+            method: "POST",
+            body: JSON.stringify(res),
+            headers: {
+              "Content-Type": "application/json"
+            },
+            credentials: "same-origin"
+          }).then(function(response) {
+            response.status     //=> number 100–599
+            response.statusText //=> String
+            response.headers    //=> Headers
+            response.url        //=> String
+          
+          }, function(error) {
+            error.message //=> String
+          })
+        })
       }
     
       setSession(authResult) {
@@ -59,6 +85,7 @@ export default class Auth {
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
+        localStorage.removeItem('sub');
         // navigate to the home route
         history.replace('/');
       }

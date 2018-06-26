@@ -1,13 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import './List.css';
+import './Project-List.css';
 import { handleResponse } from '../../helper';
 import { API_URL } from '../../config';
-import { Container, Dimmer, Loader, Segment, Button, Icon, Image as ImageComponent, Item, Label, Header } from 'semantic-ui-react';
+import { Container, Dimmer, Loader, Segment, Button, Icon, Image as ImageComponent, Item, Label, Header} from 'semantic-ui-react';
 import task_icon from './task.png';
 
 
-class List extends React.Component {
+class ProjectList extends React.Component {
 
     constructor() {
         super();
@@ -70,6 +70,7 @@ class List extends React.Component {
 
         return (
             <Container>
+                <Segment padded='very' basic>
                 <Header as='h1'>Available Projects</Header>
                 <Item.Group divided>
                     {projects.map((project) => (
@@ -84,7 +85,7 @@ class List extends React.Component {
                                     <Item.Extra>
                                         <Link to={`/projects/${project._id}`} >
                                         <Button primary floated='right'>
-                                            Volunteer to Help!
+                                            See Details
                                         <Icon name='right chevron' />
                                         </Button>
                                         </Link>
@@ -98,9 +99,10 @@ class List extends React.Component {
                             </Item>
                     ))}
                 </Item.Group>
+                </Segment>
             </Container>
         );
     }
 }
 
-export default List;
+export default ProjectList;

@@ -60,7 +60,8 @@ class Register extends React.Component {
         this.setState({ loading: true });
 
         
-        auth.sendEmail(this.state.email);
+        auth.sendEmail(this.state.email)
+        this.setState({ loading: false, success: true });
         
     }
 
@@ -74,7 +75,7 @@ class Register extends React.Component {
                 <Form error={this.state.formValid} onSubmit={() => this.handleSubmit()} loading={loading} >
 
                     <Form.Field required>
-                        <Form.Input label='Email' placeholder='Email' type='email' name='email' onChange={(event) => this.handleUserInput(event)} error={!this.state.emailValid} />
+                        <Form.Input label='Email' placeholder='Email' type='email' disabled={success} name='email' onChange={(event) => this.handleUserInput(event)} error={!this.state.emailValid} />
                     </Form.Field>
                     <Button type='submit'>Send Me a Magic Link</Button>
                 </Form>
